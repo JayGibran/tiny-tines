@@ -1,3 +1,4 @@
+'use strict';
 const fs = require('fs');
 
 module.exports = {
@@ -10,7 +11,6 @@ module.exports = {
   },
   fileExists(path){    
     try {
-      
       if(fs.existsSync(path)) {
         return true
       } else {
@@ -20,9 +20,9 @@ module.exports = {
       return false
     }
   },
-  IsJsonString(str) {
+  IsJsonObject(path) {
     try {
-        JSON.parse(fs.readFileSync(str));
+      JSON.parse(fs.readFileSync(path));
     } catch (e) {
         return false;
     }

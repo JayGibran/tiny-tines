@@ -7,7 +7,7 @@ module.exports = {
       const json = await response.json();
       return json;
     } catch (error) {
-      throw new Error(error);
+      return {}
     }
   }
 }

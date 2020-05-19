@@ -1,7 +1,7 @@
 # Tiny Tines
 
 # Overview
-A tines application 
+A Tines Offline Coding Exercise 
 
 # Features
 - Development based on Nodejs.
@@ -17,10 +17,10 @@ A tines application
  # Run the project
   1. Clone
 
-    ```bash
-     $ git clone https://github.com/JayGibran/tiny-tines.git
-     $ cd tiny-tines
-     ```
+  ```bash
+    $ git clone https://github.com/JayGibran/tiny-tines.git
+    $ cd tiny-tines
+  ```
 
   2. Run
   ```bash

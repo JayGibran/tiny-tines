@@ -1,12 +1,12 @@
-const { getData } = require('../utils/http');
-const {IsJsonString, fileExists,  loadFile } = require('../utils/files');
 const FileError = require('../error/FileError');
+const { getData } = require('../utils/http');
+const {IsJsonObject, fileExists,  loadFile } = require('../utils/files');
 
 class TinyTines {
   resolve(path, obj) {
     return path.split('.').reduce(function(prev, curr) {
         return prev ? prev[curr] : null
-    }, obj || self)
+    }, obj || self) || '!'
   }
   
   stringFormatter(newString, data) {
@@ -24,10 +24,12 @@ class TinyTines {
     
     if(!fileExists(pathJsonFile)) throw new FileError('File does not exists');
   
-    if(!IsJsonString(pathJsonFile)) throw new FileError('It is not a valid json');
+    if(!IsJsonObject(pathJsonFile)) throw new FileError('It is not a valid json');
     
     const { agents } =  loadFile(pathJsonFile);
-
+    
+    if(!agents) throw new FileError('Malformed json');
+    
     let data = {}; 
 
     for(const agent of agents ){
@@ -35,7 +37,6 @@ class TinyTines {
           const url = this.stringFormatter(agent.options.url, data);
           const response = await getData(url);
           Object.assign(data, { [agent.name] : response });
-          ///console.log(JSON.stringify(data, null, 4));
       }else if(agent.type === 'PrintAgent'){
         console.log(this.stringFormatter(agent.options.message, data));
       }
